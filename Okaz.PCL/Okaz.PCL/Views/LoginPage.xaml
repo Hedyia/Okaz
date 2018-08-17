@@ -1,0 +1,64 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:prism="clr-namespace:Prism.Mvvm;assembly=Prism.Forms"
+             xmlns:syncfusion="clr-namespace:Syncfusion.XForms.Buttons;assembly=Syncfusion.Buttons.XForms"
+             prism:ViewModelLocator.AutowireViewModel="True"
+             x:Class="Okaz.PCL.Views.LoginPage"
+             Title="{Binding Title}">
+    <StackLayout Padding="5">
+        <Image Source="Mobile_Store"
+               HeightRequest="128"
+               WidthRequest="128"/>
+        <Entry Placeholder="Email or Phone Number"
+               Text="{Binding Email}"
+               Keyboard="Email"/>
+        <Entry Placeholder="Password"
+               Text="{Binding Password}"
+               IsPassword="True"/>
+        
+        <Button Text="Login" 
+                BackgroundColor="Navy"
+                HeightRequest="50"
+                TextColor="White"
+                Command="{Binding OnLoginCommand}"/>
+        
+        <StackLayout Orientation="Horizontal"
+                     VerticalOptions="CenterAndExpand">
+            <syncfusion:SfCheckBox Text="Remember me"
+                                   HorizontalOptions="StartAndExpand"
+                                   VerticalOptions="End"
+                                   IsChecked="{Binding IsRemebered}"/>
+            <Label Text="FORGET PASSWORD?" 
+                   Margin="0,5"
+                   HorizontalOptions="EndAndExpand"
+                   VerticalOptions="End"/>
+        </StackLayout>
+
+        <BoxView HeightRequest="1"
+                 Color="Gray" />
+        <StackLayout Orientation="Horizontal"
+                     VerticalOptions="CenterAndExpand">
+            <Button Text="Facebook"
+                    WidthRequest="140"
+                    BackgroundColor="DarkBlue"
+                    HorizontalOptions="StartAndExpand"/>
+            <Label Text="OR" 
+                   VerticalOptions="Center"/>
+            <Button Text="Google+"
+                    WidthRequest="140"
+                    BackgroundColor="DarkRed"
+                    HorizontalOptions="EndAndExpand"/>
+        </StackLayout>
+        <StackLayout Orientation="Horizontal"
+                     VerticalOptions="CenterAndExpand">
+            <Label Text="Don't Have Account?"
+                   HorizontalOptions="CenterAndExpand"/>
+            <Label Text="SIGNUP"
+                   HorizontalOptions="CenterAndExpand"
+                   TextColor="Black"
+                   FontAttributes="Bold" />
+        </StackLayout>
+    </StackLayout>
+  
+</ContentPage>

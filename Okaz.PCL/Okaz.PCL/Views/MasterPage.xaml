@@ -1,0 +1,19 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<MasterDetailPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:prism="clr-namespace:Prism.Mvvm;assembly=Prism.Forms"
+                  xmlns:pages="clr-namespace:Okaz.PCL.Views"
+                  prism:ViewModelLocator.AutowireViewModel="True"
+             x:Class="Okaz.PCL.Views.MasterPage">
+    <MasterDetailPage.Master>
+        <pages:MenuPage />
+    </MasterDetailPage.Master>
+    <MasterDetailPage.Detail>
+        <NavigationPage x:Name="Navigator">
+            <x:Arguments>
+                <pages:HomePage />
+            </x:Arguments>
+        </NavigationPage>
+    </MasterDetailPage.Detail>
+  
+</MasterDetailPage>
