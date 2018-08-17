@@ -189,10 +189,16 @@
     <Reference Include="Xamarin.iOS" />
   </ItemGroup>
   <ItemGroup>
+    <PackageReference Include="SNavigation.Forms">
+      <Version>0.1.2</Version>
+    </PackageReference>
     <PackageReference Include="Syncfusion.Xamarin.Buttons">
       <Version>16.2.0.46</Version>
     </PackageReference>
     <PackageReference Include="Syncfusion.Xamarin.SfListView">
+      <Version>16.2.0.46</Version>
+    </PackageReference>
+    <PackageReference Include="Syncfusion.Xamarin.SfRating">
       <Version>16.2.0.46</Version>
     </PackageReference>
     <PackageReference Include="Syncfusion.Xamarin.SfRotator">

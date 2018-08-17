@@ -12,7 +12,7 @@ namespace Okaz.PCL.Models
         public string OS { get; set; }
         public string StorageCapacity { get; set; }
         public string NumberOfSIM { get; set; }
-        public string MpbilePhoneType { get; set; }
+        public string MobilePhoneType { get; set; }
         public string CellularNetworkTechnology { get; set; }
         public string ChipsetManufacturer { get; set; }
         public string ModelNumber { get; set; }

@@ -33,8 +33,8 @@ namespace Okaz.PCL.ViewModels
         #region Methods
         void ExecuteNavigateCommand()
         {
-            _navigationService.NavigateAsync(nameof(MasterPage) + "../" +
-                nameof(NavigationPage) + "../" +
+            _navigationService.NavigateAsync(nameof(MasterPage) + "/" +
+                nameof(NavigationPage) + "/" +
                 SelectedMenuItem.PageName);
         }
         #endregion

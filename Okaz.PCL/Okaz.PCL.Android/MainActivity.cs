@@ -1,6 +1,8 @@
 ﻿using Android.App;
 using Android.Content.PM;
 using Android.OS;
+using Android.Support.V7.Widget;
+using Android.Views;
 using Prism;
 using Prism.Ioc;
 
@@ -11,14 +13,17 @@ namespace Okaz.PCL.Droid
     {
         protected override void OnCreate(Bundle bundle)
         {
+
             TabLayoutResource = Resource.Layout.Tabbar;
             ToolbarResource = Resource.Layout.Toolbar;
 
             base.OnCreate(bundle);
 
             global::Xamarin.Forms.Forms.Init(this, bundle);
+            Stormlion.SNavigation.Droid.Platform.Init(this);
             LoadApplication(new App(new AndroidInitializer()));
         }
+
     }
 
     public class AndroidInitializer : IPlatformInitializer

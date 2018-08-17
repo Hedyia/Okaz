@@ -6,8 +6,15 @@
              xmlns:prism="clr-namespace:Prism.Mvvm;assembly=Prism.Forms"
              prism:ViewModelLocator.AutowireViewModel="True"
              x:Class="Okaz.PCL.Views.HomePage"
+             xmlns:local="clr-namespace:Okaz.PCL.Helpers"
+             xmlns:b="clr-namespace:Prism.Behaviors;assembly=Prism.Forms"
              Title="{Binding Title}"
              BackgroundColor="Silver">
+    <ContentPage.Resources>
+        <ResourceDictionary>
+            <local:CustomConverter x:Key="EventArgs" />
+        </ResourceDictionary>
+    </ContentPage.Resources>
     <ContentPage.ToolbarItems>
         <ToolbarItem Icon="ic_shopping_cart" />
     </ContentPage.ToolbarItems>
@@ -135,7 +142,7 @@
                                                        HorizontalOptions="Center"
                                                        Grid.Row="2"
                                                        Grid.ColumnSpan="2"/>
-                                                <Label Text="{Binding Ratting}"
+                                                <Label Text="{Binding Rating}"
                                                        HorizontalOptions="End"
                                                        Grid.Row="3" Grid.Column="0"/>
                                                 <Image Source="ic_star_rate"
@@ -148,6 +155,11 @@
                                 </ViewCell>
                             </DataTemplate>
                         </syncfusion:SfListView.ItemTemplate>
+                        <syncfusion:SfListView.Behaviors>
+                            <local:EventToCommandBehavior EventName="ItemTapped"
+                                  Command="{Binding TapCommand}"
+                                  Converter="{StaticResource EventArgs}" />
+                        </syncfusion:SfListView.Behaviors>
                     </syncfusion:SfListView>
                 </StackLayout>
             </Grid>

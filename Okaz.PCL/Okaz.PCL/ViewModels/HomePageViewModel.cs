@@ -1,16 +1,32 @@
 ﻿using Okaz.PCL.Models;
+using Okaz.PCL.Services;
+using Okaz.PCL.Views;
 using Prism.Commands;
 using Prism.Mvvm;
+using Prism.Navigation;
+using Prism.Services;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
+using System.Windows.Input;
+using Xamarin.Forms;
+using Syncfusion.ListView.XForms;
 
 namespace Okaz.PCL.ViewModels
 {
 	public class HomePageViewModel : BindableBase
 	{
+        private INavigationService _navigationService;
+        private ICatalogDataService _catalogDaraService;
         private string _title = "Home";
+        private Command<Syncfusion.ListView.XForms.ItemTappedEventArgs> _tapCommand;
+
+        public Command<Syncfusion.ListView.XForms.ItemTappedEventArgs> TapCommand
+        {
+            get { return _tapCommand; }
+            protected set { _tapCommand = value; }
+        }
         public string Title
         {
             get { return _title; }
@@ -45,54 +61,6 @@ namespace Okaz.PCL.ViewModels
                 return _dealsOfWeek;
             }
             set { SetProperty(ref _dealsOfWeek, value); }
-        }
-        private ObservableCollection<Product> _products;
-        public ObservableCollection<Product> Products
-        {
-            get
-            {
-                if (_products == null)
-                {
-                    _products = new ObservableCollection<Product>()
-                    {
-                        new Product
-                        {
-                            Id = 1,
-                            Name = "IPhone X",
-                            ImgUrl = "https://cf2.s3.souqcdn.com/item/2018/01/30/24/05/14/35/item_L_24051435_102956436.jpg",
-                            Price = 18500f,
-                            Ratting = 4.2f
-                        },
-                        new Product
-                        {
-                            Id = 2,
-                            Name = "IPhone 8",
-                            ImgUrl = "https://cf5.s3.souqcdn.com/item/2017/05/09/22/69/30/38/item_XL_22693038_31468716.jpg",
-                            Price = 17777f,
-                            Ratting= 4.0f
-                        },
-                        new Product
-                        {
-                            Id = 3,
-                            Name = "Honor Play",
-                            ImgUrl = "https://cf5.s3.souqcdn.com/item/2018/02/25/30/71/96/27/item_XL_30719627_112683537.jpg",
-                            Price = 5800f,
-                            Ratting = 4.5f
-                        },
-                        new Product
-                        {
-                            Id = 4,
-                            Name = "mi A2",
-                            ImgUrl = "https://cf2.s3.souqcdn.com/item/2018/07/04/36/31/05/78/item_XL_36310578_142775161.jpg",
-                            Price = 3333f,
-                            Ratting = 3.7f
-                        }
-
-                    };
-                }
-                return _products;
-            }
-            set { SetProperty(ref _products, value); }
         }
 
         private ObservableCollection<Brand> _brands;
@@ -130,9 +98,22 @@ namespace Okaz.PCL.ViewModels
             }
             set { SetProperty(ref _brands, value); }
         }
-        public HomePageViewModel()
-        {
 
+        public ObservableCollection<MobileSpecification> Products { get => _catalogDaraService.GetAllPhones(); }
+        
+        public HomePageViewModel(INavigationService navigationService,ICatalogDataService catalogDataService)
+        {
+            _catalogDaraService = catalogDataService;
+            _navigationService = navigationService;
+            _tapCommand = new Command<Syncfusion.ListView.XForms.ItemTappedEventArgs>(Navigation);
         }
-	}
+        public void Navigation(Syncfusion.ListView.XForms.ItemTappedEventArgs eventArgs)
+        {
+            var mobileSpecification = eventArgs.ItemData as MobileSpecification;
+            var p = new NavigationParameters();
+            p.Add("1",mobileSpecification);
+
+            _navigationService.NavigateAsync("ProductDetailPage");
+        }
+    }
 }

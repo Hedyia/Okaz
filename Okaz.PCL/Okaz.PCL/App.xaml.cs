@@ -5,6 +5,7 @@ using Okaz.PCL.Views;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 using Prism.Unity;
+using Okaz.PCL.Services;
 
 [assembly: XamlCompilation(XamlCompilationOptions.Compile)]
 namespace Okaz.PCL
@@ -16,6 +17,7 @@ namespace Okaz.PCL
          * This imposes a limitation in which the App class must have a default constructor. 
          * App(IPlatformInitializer initializer = null) cannot be handled by the Activator.
          */
+        //public static CatalogDataService dataService;
         public App() : this(null) { }
 
         public App(IPlatformInitializer initializer) : base(initializer) { }
@@ -30,6 +32,8 @@ namespace Okaz.PCL
 
         protected override void RegisterTypes(IContainerRegistry containerRegistry)
         {
+            //Data Service
+            containerRegistry.Register<ICatalogDataService, CatalogDataService>();
             containerRegistry.RegisterForNavigation<NavigationPage>();
             containerRegistry.RegisterForNavigation<LoginPage, LoginPageViewModel>();
             containerRegistry.RegisterForNavigation<HomePage, HomePageViewModel>();
@@ -39,6 +43,7 @@ namespace Okaz.PCL
             containerRegistry.RegisterForNavigation<OffersPage, OffersPageViewModel>();
             containerRegistry.RegisterForNavigation<FavouritesPage, FavouritesPageViewModel>();
             containerRegistry.RegisterForNavigation<ProfilePage, ProfilePageViewModel>();
+            containerRegistry.RegisterForNavigation<ProductDetailPage, ProductDetailPageViewModel>();
         }
     }
 }
