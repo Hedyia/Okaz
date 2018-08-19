@@ -11,11 +11,13 @@ namespace Okaz.PCL.Models
         public int Id { get; set; }
         public string Name { get; set; }
         public string Description { get; set; }
+        public string Vendor { get; set; }
         public string ImgUrl { get; set; }
         public List<string> ProductImgs { get; set; }
         public float Price { get; set; }
         public float Rating { get; set; }
         public bool IsFavorites { get; set; }
         public int GetCountOfReviews { get; set; }
+        public Category Category { get; set; }
     }
 }

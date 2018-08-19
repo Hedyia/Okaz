@@ -62,6 +62,9 @@
     <PackageReference Include="Syncfusion.Xamarin.Buttons">
       <Version>16.2.0.46</Version>
     </PackageReference>
+    <PackageReference Include="Syncfusion.Xamarin.SfAutoComplete">
+      <Version>16.2.0.46</Version>
+    </PackageReference>
     <PackageReference Include="Syncfusion.Xamarin.SfListView">
       <Version>16.2.0.46</Version>
     </PackageReference>
@@ -124,7 +127,6 @@
     <AndroidResource Include="Resources\drawable\ic_favorite.png" />
     <AndroidResource Include="Resources\drawable\ic_home.png" />
     <AndroidResource Include="Resources\drawable\ic_local_offer.png" />
-    <Content Include="Resources\mipmap-hdpi\loginImg.png" />
     <AndroidResource Include="Resources\drawable\ar_login.png" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Xamarin\Android\Xamarin.Android.CSharp.targets" />

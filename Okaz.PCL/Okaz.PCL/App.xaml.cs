@@ -44,6 +44,7 @@ namespace Okaz.PCL
             containerRegistry.RegisterForNavigation<FavouritesPage, FavouritesPageViewModel>();
             containerRegistry.RegisterForNavigation<ProfilePage, ProfilePageViewModel>();
             containerRegistry.RegisterForNavigation<ProductDetailPage, ProductDetailPageViewModel>();
+            containerRegistry.RegisterForNavigation<ShoppingCartPage>();
         }
     }
 }

@@ -27,5 +27,6 @@ namespace Okaz.PCL.Models
         public bool FastCharge { get; set; }
         public string OSVersion { get; set; }
         public string MemoryRAM { get; set; }
+        public string ProcessorType { get; internal set; }
     }
 }

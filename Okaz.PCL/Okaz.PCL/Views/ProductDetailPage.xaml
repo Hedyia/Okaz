@@ -5,16 +5,19 @@
              xmlns:sfRotator="clr-namespace:Syncfusion.SfRotator.XForms;assembly=Syncfusion.SfRotator.XForms"
              xmlns:rating="clr-namespace:Syncfusion.SfRating.XForms;assembly=Syncfusion.SfRating.XForms"
              prism:ViewModelLocator.AutowireViewModel="True"
-             x:Class="Okaz.PCL.Views.ProductDetailPage">
+             BackgroundColor="Silver"
+             x:Class="Okaz.PCL.Views.ProductDetailPage"
+             Title="{Binding PhoneDetail.Name}">
     <ContentPage.Content>
         <ScrollView>
             <StackLayout>
                 <Frame Margin="5">
                     <Grid>
                         <Grid.RowDefinitions>
-                            <RowDefinition  Height=".8*"/>
+                            <RowDefinition  Height=".6*"/>
                             <RowDefinition  Height=".1*"/>
-                            <RowDefinition  Height=".1*"/>
+                            <RowDefinition  Height=".05*"/>
+                            <RowDefinition  Height=".05*"/>
                         </Grid.RowDefinitions>
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition Width=".6*" />
@@ -24,45 +27,68 @@
                         <sfRotator:SfRotator Grid.Row="0"
                                              Grid.ColumnSpan="2"
                                              HorizontalOptions="Center"
+                                             EnableAutoPlay="true"
                                              NavigationDelay="2000" 
-                                             ItemsSource="{Binding DealsOfWeek}"
+                                             ItemsSource="{Binding PhoneDetail.ProductImgs}"
                                              NavigationDirection="Horizontal"
                                              NavigationStripMode="Dots"
                                              BackgroundColor = "WhiteSmoke"
                                              NavigationStripPosition="Bottom">
                             <sfRotator:SfRotator.ItemTemplate>
                                 <DataTemplate>
-                                    <Image Source="{Binding PhoneDetail.ImgUrl}"
-                                   Aspect="AspectFit"/>
+                                    <Image Source="{Binding .}"
+                                           Aspect="AspectFit"/>
                                 </DataTemplate>
                             </sfRotator:SfRotator.ItemTemplate>
                         </sfRotator:SfRotator>
                         <!--Product Name-->
                         <Label Text="{Binding PhoneDetail.Name}"
+                               TextColor="Black"
+                               FontAttributes="Bold"
+                               HorizontalOptions="Center"
                                Grid.Row="1"
+                               Grid.ColumnSpan="2"
                                Grid.Column="0"/>
-                        <StackLayout Grid.Row="2"
-                                     Grid.ColumnSpan="2">
-                            <rating:SfRating/>
-                            <Label Text="{Binding PhoneDetail.NoOfReviews, StringFormat='{0} Reviews'}" />
-                        </StackLayout>
+                        <rating:SfRating ReadOnly="False"
+                                         ItemSize="20"
+                                         Grid.Row="2"
+                                         Grid.Column="1"
+                                         HorizontalOptions="Center"/>
+                        <Label Text="{Binding PhoneDetail.GetCountOfReviews, StringFormat='{0} Reviews'}"
+                               Grid.Row="3"
+                               Grid.Column="1"
+                               HorizontalOptions="Start"/>
                         <!--Price-->
                         <Label Text="{Binding PhoneDetail.Price, StringFormat='{0} EGP'}"
                                Grid.Row="2"
                                Grid.Column="0"/>
                     </Grid>
                 </Frame>
+                <Button Text="Add to Cart" 
+                        Command="{Binding }"
+                        BackgroundColor="Navy"
+                        TextColor="White"
+                        FontSize="Medium"/>
                 
                 <Button Text="Add to Favorite" 
-                        Command="{Binding }" />
+                        Command="{Binding }"
+                        BackgroundColor="#fc6c85"
+                        TextColor="White"
+                        FontSize="Medium"/>
                 <Frame Margin="5"
-                       Padding="5">
-                    <Label Text="Compare With another Product>" />
+                       Padding="15">
+                    <Label Text="Compare With another Product>"
+                           FontSize="Medium"
+                           TextColor="Black"
+                           HorizontalOptions="Center"/>
                 </Frame>
-                <Frame>
+                <Frame Margin="5">
                     <StackLayout Padding="5">
                         <Label Text="Sold By:" />
-                        <Label Text="{Binding PhoneDetail.Vendor}" />
+                        <Label Text="{Binding PhoneDetail.Vendor}"
+                               FontSize="Medium"
+                               FontAttributes="Bold"
+                               TextColor="Black"/>
                         <Label Text="View More Vendors" 
                                TextColor="Blue" />
                     </StackLayout>
@@ -102,25 +128,42 @@
                                    Grid.Row="1"
                                    Grid.Column="0"/>
 
-                            <Label Text="Integrated Camera"
+                            <Label Text="Display Size"
                                    FontAttributes="Bold"
-                                   Grid.Row="0"
+                                   Grid.Row="2"
                                    Grid.Column="0"/>
                             <!--Binding-->
                             <Label Text="{Binding PhoneDetail.Brand}"
                                    Grid.Row="0" 
-                                   Grid.Column="1"/>
+                                   Grid.Column="1"
+                                   HorizontalOptions="End"/>
 
                             <Label Text="{Binding PhoneDetail.ProcessorType}"
                                    Grid.Row="1" 
-                                   Grid.Column="1"/>
+                                   Grid.Column="1"
+                                   HorizontalOptions="End"/>
 
-                            <Label Text="{Binding PhoneDetail.IntegratedCamera}"
+                            <Label Text="{Binding PhoneDetail.DisplaySize}"
                                    Grid.Row="2" 
-                                   Grid.Column="1"/>
+                                   Grid.Column="1"
+                                   HorizontalOptions="End"/>
                         </Grid>
                         <Label Text="Read More"
                                TextColor="Blue"/>
+                    </StackLayout>
+                </Frame>
+                <Frame Margin="5">
+                    <StackLayout >
+                        <Label Text="Tap on start to rate"
+                               HorizontalOptions="Center"/>
+                        <rating:SfRating ReadOnly="False"
+                                         HorizontalOptions="Center"/>
+                        <Entry Placeholder="Review" />
+                        <Button
+                            Text="Submit Review"
+                            BackgroundColor="DarkViolet"
+                            TextColor="White"
+                            FontSize="Medium"/>
                     </StackLayout>
                 </Frame>
             </StackLayout>

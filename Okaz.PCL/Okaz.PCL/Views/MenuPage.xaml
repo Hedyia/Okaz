@@ -23,7 +23,7 @@
                 TextColor="White">
             </Label>
             <ListView 
-                BackgroundColor="Navy"
+                BackgroundColor="#cd201f"
                 ItemsSource="{Binding MenuItems}"
                 SelectedItem="{Binding SelectedMenuItem}"
                 HasUnevenRows="True"

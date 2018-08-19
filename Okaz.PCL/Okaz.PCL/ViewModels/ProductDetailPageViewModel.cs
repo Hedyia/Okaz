@@ -8,8 +8,8 @@ using System.Linq;
 
 namespace Okaz.PCL.ViewModels
 {
-	public class ProductDetailPageViewModel : BindableBase
-	{
+	public class ProductDetailPageViewModel : BindableBase , INavigatedAware
+    {
         #region BackingFields
         INavigationService _navigationService;
         private MobileSpecification _phoneDetail;
@@ -30,6 +30,18 @@ namespace Okaz.PCL.ViewModels
         {
             _navigationService = navigationService;
         }
+
+        public void OnNavigatedFrom(NavigationParameters parameters)
+        {
+            throw new NotImplementedException();
+        }
+
+        public void OnNavigatedTo(NavigationParameters parameters)
+        {
+            PhoneDetail = parameters["1"] as MobileSpecification;
+        }
+
+
         #endregion
 
 

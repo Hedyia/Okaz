@@ -12,6 +12,7 @@ using System.Linq;
 using System.Windows.Input;
 using Xamarin.Forms;
 using Syncfusion.ListView.XForms;
+using Syncfusion.DataSource.Extensions;
 
 namespace Okaz.PCL.ViewModels
 {
@@ -62,8 +63,35 @@ namespace Okaz.PCL.ViewModels
             }
             set { SetProperty(ref _dealsOfWeek, value); }
         }
-
         private ObservableCollection<Brand> _brands;
+        private string _filter;
+        private ObservableCollection<string> _filteredProducts;
+        public ObservableCollection<string> FilteredProducts
+        {
+            get { return _filteredProducts; }
+            set { SetProperty(ref _filteredProducts, value); }
+        }
+        public string Filter
+        {
+            get { return _filter; }
+            set { SetProperty(ref _filter, value); Search(); }
+        }
+
+        private void Search()
+        {
+            if (string.IsNullOrEmpty(Filter))
+            {
+                var products = Products.Select(p => p.Name).ToList();
+                FilteredProducts = new ObservableCollection<string>(products);
+            }
+            else
+            {
+                FilteredProducts = FilteredProducts
+                    .Where(s => s.ToLower().StartsWith(Filter.ToLower()))
+                    .ToObservableCollection();
+            }
+        }
+
         public ObservableCollection<Brand> Brands
         {
             get
@@ -106,14 +134,17 @@ namespace Okaz.PCL.ViewModels
             _catalogDaraService = catalogDataService;
             _navigationService = navigationService;
             _tapCommand = new Command<Syncfusion.ListView.XForms.ItemTappedEventArgs>(Navigation);
+            var products = Products.Select(p => p.Name).ToList();
+            FilteredProducts = new ObservableCollection<string>(products);
+
         }
         public void Navigation(Syncfusion.ListView.XForms.ItemTappedEventArgs eventArgs)
         {
             var mobileSpecification = eventArgs.ItemData as MobileSpecification;
             var p = new NavigationParameters();
-            p.Add("1",mobileSpecification);
+            p.Add("1", mobileSpecification);
 
-            _navigationService.NavigateAsync("ProductDetailPage");
+            _navigationService.NavigateAsync(nameof(ProductDetailPage), p);
         }
     }
 }

@@ -8,8 +8,9 @@
              x:Class="Okaz.PCL.Views.HomePage"
              xmlns:local="clr-namespace:Okaz.PCL.Helpers"
              xmlns:b="clr-namespace:Prism.Behaviors;assembly=Prism.Forms"
+             xmlns:SfCheckBox="clr-namespace:Syncfusion.XForms.Buttons;assembly=Syncfusion.Buttons.XForms"
              Title="{Binding Title}"
-             BackgroundColor="Silver">
+             BackgroundColor="#a6acaf">
     <ContentPage.Resources>
         <ResourceDictionary>
             <local:CustomConverter x:Key="EventArgs" />
@@ -20,149 +21,197 @@
     </ContentPage.ToolbarItems>
     <ContentPage.Content>
         <ScrollView>
-            <Grid Padding="5">
-                <Grid.RowDefinitions>
-                    <RowDefinition Height="300" />
-                    <RowDefinition Height="150" />
-                    <RowDefinition Height="150" />
-                    <RowDefinition Height="300" />
-                </Grid.RowDefinitions>
-                <!--Main Products-->
-                <sfRotator:SfRotator Grid.Row="0"
+            <StackLayout>
+                <SearchBar x:Name="searchBar"
+                           BackgroundColor="#cd201f"
+                           TextColor="White"
+                           Placeholder="Search..."
+                           PlaceholderColor="White"
+                           Text="{Binding Filter}"
+                           SearchCommand="{Binding SearchCommand}">
+                </SearchBar>
+                <StackLayout x:Name="searchStack"
+                             IsVisible="False"
+                             BackgroundColor="White">
+                    <StackLayout Orientation="Horizontal"
+                             Padding="5">
+                        <SfCheckBox:SfCheckBox Text="Mobile"
+                                   HorizontalOptions="StartAndExpand"/>
+                        <SfCheckBox:SfCheckBox Text="Laptop"
+                                   HorizontalOptions="CenterAndExpand"/>
+                        <SfCheckBox:SfCheckBox Text="Tablet"
+                                   HorizontalOptions="EndAndExpand"/>
+                    </StackLayout>
+                    <ListView ItemsSource="{Binding FilteredProducts}">
+                        <ListView.ItemTemplate>
+                            <DataTemplate>
+                                <TextCell Text="{Binding .}" TextColor="Black" />
+                            </DataTemplate>
+                        </ListView.ItemTemplate>
+                    </ListView>
+                    <StackLayout.Triggers>
+                        <DataTrigger TargetType="StackLayout"
+                                     Binding="{Binding Source={x:Reference searchBar},
+                            Path=IsFocused}"
+                                     Value="True">
+                            <Setter Property="IsVisible" Value="True" />
+                        </DataTrigger>
+                    </StackLayout.Triggers>
+                </StackLayout>
+                <Grid x:Name="mainGrid"
+                      Padding="5">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="300" />
+                        <RowDefinition Height="150" />
+                        <RowDefinition Height="150" />
+                        <RowDefinition Height="300" />
+                    </Grid.RowDefinitions>
+                    <!--Main Products-->
+                    <sfRotator:SfRotator Grid.Row="0"
                                      NavigationDelay="2000" 
+                                     EnableAutoPlay="False"
                                      ItemsSource="{Binding DealsOfWeek}"
                                      NavigationDirection="Horizontal"
                                      NavigationStripMode="Dots"
                                      BackgroundColor = "WhiteSmoke"
                                      NavigationStripPosition="Bottom">
-                    <sfRotator:SfRotator.ItemTemplate>
-                        <DataTemplate>
-                            <Image Source="{Binding ImgUrl}"
+                        <sfRotator:SfRotator.ItemTemplate>
+                            <DataTemplate>
+                                <Image Source="{Binding ImgUrl}"
                                    Aspect="AspectFit"/>
-                        </DataTemplate>
-                    </sfRotator:SfRotator.ItemTemplate>
-                </sfRotator:SfRotator>
-                <!--Top Deals Products-->
-                <StackLayout Grid.Row="1">
-                    <StackLayout Orientation="Horizontal">
-                        <Label Text="Top Deals For You" 
+                            </DataTemplate>
+                        </sfRotator:SfRotator.ItemTemplate>
+                    </sfRotator:SfRotator>
+                    <!--Top Deals Products-->
+                    <StackLayout Grid.Row="1">
+                        <StackLayout Orientation="Horizontal">
+                            <Label Text="Top Deals For You" 
                                FontAttributes="Bold" 
                                FontSize="Medium"
                                HorizontalOptions="StartAndExpand"/>
-                        <Label Text="SEE ALL"
+                            <Label Text="SEE ALL"
                                FontAttributes="Bold"
                                TextColor="Blue"
                                FontSize="Medium"
                                HorizontalOptions="EndAndExpand"/>
-                    </StackLayout>
-                    <syncfusion:SfListView ItemsSource="{Binding Products}"
+                        </StackLayout>
+                        <syncfusion:SfListView ItemsSource="{Binding Products}"
                                        Orientation="Horizontal"
                                        ItemSize="100">
-                        <syncfusion:SfListView.ItemTemplate>
-                            <DataTemplate>
-                                <ViewCell>
-                                    <ViewCell.View>
-                                        <Frame Margin="5">
-                                            <Image Source="{Binding ImgUrl}"
+                            <syncfusion:SfListView.ItemTemplate>
+                                <DataTemplate>
+                                    <ViewCell>
+                                        <ViewCell.View>
+                                            <Frame Margin="5">
+                                                <Image Source="{Binding ImgUrl}"
                                                Aspect="AspectFit"/>
-                                        </Frame>
-                                    </ViewCell.View>
-                                </ViewCell>
-                            </DataTemplate>
-                        </syncfusion:SfListView.ItemTemplate>
-                    </syncfusion:SfListView>
-
-                </StackLayout>
-                <!--Brands-->
-                <StackLayout Grid.Row="2">
-                    <StackLayout Orientation="Horizontal">
-                        <Label Text="Brands" 
-                               FontAttributes="Bold" 
-                               FontSize="Medium"
-                               HorizontalOptions="StartAndExpand"/>
+                                            </Frame>
+                                        </ViewCell.View>
+                                    </ViewCell>
+                                </DataTemplate>
+                            </syncfusion:SfListView.ItemTemplate>
+                        </syncfusion:SfListView>
 
                     </StackLayout>
-                    <syncfusion:SfListView ItemsSource="{Binding Brands}"
-                                       Orientation="Horizontal"
-                                       ItemSize="100">
-                        <syncfusion:SfListView.ItemTemplate>
-                            <DataTemplate>
-                                <ViewCell>
-                                    <ViewCell.View>
-                                        <Frame Margin="5">
-                                            <Image Source="{Binding ImgUrl}"
-                                                   Aspect="AspectFit"/>
-                                        </Frame>
-                                    </ViewCell.View>
-                                </ViewCell>
-                            </DataTemplate>
-                        </syncfusion:SfListView.ItemTemplate>
-                    </syncfusion:SfListView>
-
-                </StackLayout>
-
-                <!--Most Rated-->
-                <StackLayout Grid.Row="3">
-                    <Label Text="Top Rated Products" 
+                    <!--Brands-->
+                    <StackLayout Grid.Row="2">
+                        <StackLayout Orientation="Horizontal">
+                            <Label Text="Brands" 
                                FontAttributes="Bold" 
                                FontSize="Medium"
                                HorizontalOptions="StartAndExpand"/>
-                    <syncfusion:SfListView
+
+                        </StackLayout>
+                        <syncfusion:SfListView ItemsSource="{Binding Brands}"
+                                       Orientation="Horizontal"
+                                       ItemSize="100">
+                            <syncfusion:SfListView.ItemTemplate>
+                                <DataTemplate>
+                                    <ViewCell>
+                                        <ViewCell.View>
+                                            <Frame Margin="5">
+                                                <Image Source="{Binding ImgUrl}"
+                                                   Aspect="AspectFit"/>
+                                            </Frame>
+                                        </ViewCell.View>
+                                    </ViewCell>
+                                </DataTemplate>
+                            </syncfusion:SfListView.ItemTemplate>
+                        </syncfusion:SfListView>
+
+                    </StackLayout>
+
+                    <!--Most Rated-->
+                    <StackLayout Grid.Row="3">
+                        <Label Text="Top Rated Products" 
+                               FontAttributes="Bold" 
+                               FontSize="Medium"
+                               HorizontalOptions="StartAndExpand"/>
+                        <syncfusion:SfListView
                         ItemSize="200"
                         Orientation="Horizontal"
                         ItemsSource="{Binding Products}">
-                        <syncfusion:SfListView.ItemTemplate>
-                            <DataTemplate>
-                                <ViewCell>
-                                    <ViewCell.View>
-                                        <Frame Margin="5">
-                                            <Grid>
-                                                <Grid.RowDefinitions>
-                                                    <RowDefinition Height=".6*" />
-                                                    <RowDefinition Height=".2*" />
-                                                    <RowDefinition Height=".1*" />
-                                                    <RowDefinition Height=".1*" />
-                                                </Grid.RowDefinitions>
-                                                <Grid.ColumnDefinitions>
-                                                    <ColumnDefinition Width="*" />
-                                                    <ColumnDefinition Width="*" />
-                                                </Grid.ColumnDefinitions>
-                                                <Image Source="{Binding ImgUrl}"
+                            <syncfusion:SfListView.ItemTemplate>
+                                <DataTemplate>
+                                    <ViewCell>
+                                        <ViewCell.View>
+                                            <Frame Margin="5">
+                                                <Grid>
+                                                    <Grid.RowDefinitions>
+                                                        <RowDefinition Height=".6*" />
+                                                        <RowDefinition Height=".2*" />
+                                                        <RowDefinition Height=".1*" />
+                                                        <RowDefinition Height=".1*" />
+                                                    </Grid.RowDefinitions>
+                                                    <Grid.ColumnDefinitions>
+                                                        <ColumnDefinition Width="*" />
+                                                        <ColumnDefinition Width="*" />
+                                                    </Grid.ColumnDefinitions>
+                                                    <Image Source="{Binding ImgUrl}"
                                                        HorizontalOptions="CenterAndExpand"
                                                        Aspect="AspectFit"
                                                        Grid.Row="0"
                                                        Grid.ColumnSpan="2"/>
-                                                <Label Text="{Binding Name}"
+                                                    <Label Text="{Binding Name}"
                                                        TextColor="Black"
                                                        FontAttributes="Bold"
                                                        HorizontalOptions="Center"
                                                        Grid.Row="1"
                                                        Grid.ColumnSpan="2"/>
-                                                <Label Text="{Binding Price, StringFormat='{0} EGP'}"
+                                                    <Label Text="{Binding Price, StringFormat='{0} EGP'}"
                                                        HorizontalOptions="Center"
                                                        Grid.Row="2"
                                                        Grid.ColumnSpan="2"/>
-                                                <Label Text="{Binding Rating}"
+                                                    <Label Text="{Binding Rating}"
                                                        HorizontalOptions="End"
                                                        Grid.Row="3" Grid.Column="0"/>
-                                                <Image Source="ic_star_rate"
+                                                    <Image Source="ic_star_rate"
                                                        HorizontalOptions="Start"
                                                        Grid.Row="3" Grid.Column="1"/>
-                                            </Grid>
-                                        </Frame>
+                                                </Grid>
+                                            </Frame>
 
-                                    </ViewCell.View>
-                                </ViewCell>
-                            </DataTemplate>
-                        </syncfusion:SfListView.ItemTemplate>
-                        <syncfusion:SfListView.Behaviors>
-                            <local:EventToCommandBehavior EventName="ItemTapped"
+                                        </ViewCell.View>
+                                    </ViewCell>
+                                </DataTemplate>
+                            </syncfusion:SfListView.ItemTemplate>
+                            <syncfusion:SfListView.Behaviors>
+                                <local:EventToCommandBehavior EventName="ItemTapped"
                                   Command="{Binding TapCommand}"
                                   Converter="{StaticResource EventArgs}" />
-                        </syncfusion:SfListView.Behaviors>
-                    </syncfusion:SfListView>
-                </StackLayout>
-            </Grid>
+                            </syncfusion:SfListView.Behaviors>
+                        </syncfusion:SfListView>
+                    </StackLayout>
+                    <Grid.Triggers>
+                        <DataTrigger TargetType="Grid"
+                                     Binding="{Binding Source={x:Reference searchBar},
+                            Path=IsFocused}"
+                                     Value="True">
+                            <Setter Property="IsVisible" Value="False" />
+                        </DataTrigger>
+                    </Grid.Triggers>
+                </Grid>
+            </StackLayout>
         </ScrollView>
     </ContentPage.Content>
   
