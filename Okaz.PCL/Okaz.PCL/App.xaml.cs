@@ -24,10 +24,10 @@ namespace Okaz.PCL
 
         protected override async void OnInitialized()
         {
-            Syncfusion.Licensing.SyncfusionLicenseProvider.RegisterLicense("key");
+            Syncfusion.Licensing.SyncfusionLicenseProvider.RegisterLicense("Key");
             InitializeComponent();
 
-            await NavigationService.NavigateAsync("LoginPage");
+            await NavigationService.NavigateAsync("ShoppingCartPage");
         }
 
         protected override void RegisterTypes(IContainerRegistry containerRegistry)
@@ -44,7 +44,8 @@ namespace Okaz.PCL
             containerRegistry.RegisterForNavigation<FavouritesPage, FavouritesPageViewModel>();
             containerRegistry.RegisterForNavigation<ProfilePage, ProfilePageViewModel>();
             containerRegistry.RegisterForNavigation<ProductDetailPage, ProductDetailPageViewModel>();
-            containerRegistry.RegisterForNavigation<ShoppingCartPage>();
+            containerRegistry.RegisterForNavigation<ShoppingCartPage, ShoppingCartPageViewModel>();
+            containerRegistry.RegisterForNavigation<ComparisonPage>();
         }
     }
 }

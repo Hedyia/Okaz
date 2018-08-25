@@ -2,7 +2,141 @@
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:prism="clr-namespace:Prism.Mvvm;assembly=Prism.Forms"
+             xmlns:b="clr-namespace:Prism.Behaviors;assembly=Prism.Forms"
              prism:ViewModelLocator.AutowireViewModel="True"
-             x:Class="Okaz.PCL.Views.ShoppingCartPage">
-  
+             x:Class="Okaz.PCL.Views.ShoppingCartPage"
+             Title="Shopping Cart">
+    <ContentPage.Content>
+        <StackLayout Margin="5">
+            <Frame Margin="3" HorizontalOptions="FillAndExpand">
+                <StackLayout>
+                    <Label Text="YOUR CART" 
+                           HorizontalTextAlignment="Center"
+                           HorizontalOptions="Center"
+                           FontAttributes="Bold"
+                           FontSize="Large"/>
+                    <Label Text="Check Your Order and head to checkout" 
+                           HorizontalTextAlignment="Center"
+                           HorizontalOptions="Center"/>
+                </StackLayout>
+            </Frame>
+            <ListView
+                ItemsSource="{Binding ShoppingCart}"
+                HasUnevenRows="True"
+                SeparatorVisibility="None">
+                <ListView.ItemTemplate>
+                    <DataTemplate>
+                        <ViewCell>
+                            <Frame Margin="3">
+                                <Grid >
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="2*" />
+                                        <ColumnDefinition Width="*" />
+                                        <ColumnDefinition Width="*" />
+                                        <ColumnDefinition Width="*" />
+                                    </Grid.ColumnDefinitions>
+                                    <Grid.RowDefinitions>
+                                        <RowDefinition Height=".2*" />
+                                        <RowDefinition Height=".4*" />
+                                        <RowDefinition Height=".2*" />
+                                        <RowDefinition Height=".2*" />
+                                    </Grid.RowDefinitions>
+                                    <!--Product Image-->
+                                    <Image Source="{Binding ImgUrl}"
+                                           HeightRequest="20"
+                                           WidthRequest="20"
+                                           Grid.Row="0"
+                                           Grid.RowSpan="2"
+                                           Grid.Column="0"/>
+                                    <!--Product Name-->
+                                    <Label Text="{Binding Name}"
+                                           FontAttributes="Bold"
+                                           FontSize="Small"
+                                           TextColor="Black"
+                                           Grid.Row="0"
+                                           Grid.ColumnSpan="2"
+                                           Grid.Column="1"/>
+                                    <!--Product Price-->
+                                    <Label Text="{Binding Price, StringFormat='{0}LE'}"
+                                        FontSize="Small"
+                                        Grid.Row="0"
+                                        Grid.Column="3"/>
+                                    <!--Description-->
+                                    <Label Text="{Binding Description}"
+                                           Grid.Row="1" 
+                                           Grid.Column="1"
+                                           Grid.ColumnSpan="3" />
+                                    <!--Qty-->
+                                    <Label Text="Qty"
+                                           Grid.Row="2"
+                                           Grid.Column="1"
+                                           FontSize="Micro"/>
+                                    <!--Price-->
+                                    <Label Text="Price"
+                                           Grid.Row="2"
+                                           Grid.Column="2"
+                                           FontSize="Micro"/>
+                                    <!--Line Total-->
+                                    <Label Text="Line Total"
+                                           Grid.Row="2"
+                                           Grid.Column="3"
+                                           FontSize="Micro"/>
+                                </Grid>
+                            </Frame>
+                        </ViewCell>
+                    </DataTemplate>
+                </ListView.ItemTemplate>
+            </ListView>
+            <Frame Margin="3"
+                   VerticalOptions="EndAndExpand"
+                   HeightRequest="200">
+                <StackLayout>
+                    <Label Text="Your Order"
+                           TextColor="Black"
+                           FontSize="Medium"/>
+                    <Label Text="Purchase Total" />
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width=".8*" />
+                            <ColumnDefinition Width=".2*" />
+                        </Grid.ColumnDefinitions>
+                        <Grid.RowDefinitions>
+                            <RowDefinition />
+                        </Grid.RowDefinitions>
+                        <Label Text="Shipping Cost"
+                           Grid.Row="0" 
+                           Grid.Column="0"/>
+                        <Label Text="{Binding Shipping, StringFormat='{0}LE'}"
+                           HorizontalOptions="Start"
+                           TextColor="Black"
+                           Grid.Row="0"
+                           Grid.Column="1"/>
+                    </Grid>
+                    <Grid Margin="2">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition />
+                            <ColumnDefinition />
+                        </Grid.ColumnDefinitions>
+                        <Grid.RowDefinitions>
+                            <RowDefinition />
+                        </Grid.RowDefinitions>
+                        <Label Text="Total"
+                       FontAttributes="Bold"
+                       FontSize="Large"
+                       HorizontalOptions="CenterAndExpand"
+                       Grid.Row="0"
+                       Grid.Column="0"/>
+                        <Label Text="{Binding Total, StringFormat='{0}LE'}"
+                       FontAttributes="Bold"
+                       FontSize="Large"
+                       TextColor="Black" 
+                       HorizontalOptions="CenterAndExpand"
+                       Grid.Row="0"
+                       Grid.Column="1"/>
+                    </Grid>
+                    <Button Text="Checkout" />
+                </StackLayout>
+            </Frame>
+        </StackLayout>
+    </ContentPage.Content>
 </ContentPage>
