@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Okaz.PCL.Models
 {
-    public class MobileSpecification : Product
+    public class MobileSpecification : IProductSpecification
     {
         public string Brand { get; set; }
         public string OS { get; set; }

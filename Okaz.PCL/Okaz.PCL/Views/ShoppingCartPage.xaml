@@ -21,7 +21,7 @@
                 </StackLayout>
             </Frame>
             <ListView
-                ItemsSource="{Binding ShoppingCart}"
+                ItemsSource="{Binding ShoppingCart.ShoppingCartItems}"
                 HasUnevenRows="True"
                 SeparatorVisibility="None">
                 <ListView.ItemTemplate>
@@ -42,14 +42,14 @@
                                         <RowDefinition Height=".2*" />
                                     </Grid.RowDefinitions>
                                     <!--Product Image-->
-                                    <Image Source="{Binding ImgUrl}"
+                                    <Image Source="{Binding Product.ImgUrl}"
                                            HeightRequest="20"
                                            WidthRequest="20"
                                            Grid.Row="0"
                                            Grid.RowSpan="2"
                                            Grid.Column="0"/>
                                     <!--Product Name-->
-                                    <Label Text="{Binding Name}"
+                                    <Label Text="{Binding Product.Name}"
                                            FontAttributes="Bold"
                                            FontSize="Small"
                                            TextColor="Black"
@@ -57,12 +57,12 @@
                                            Grid.ColumnSpan="2"
                                            Grid.Column="1"/>
                                     <!--Product Price-->
-                                    <Label Text="{Binding Price, StringFormat='{0}LE'}"
+                                    <Label Text="{Binding Product.Price, StringFormat='{0}LE'}"
                                         FontSize="Small"
                                         Grid.Row="0"
                                         Grid.Column="3"/>
                                     <!--Description-->
-                                    <Label Text="{Binding Description}"
+                                    <Label Text="{Binding Product.Description}"
                                            Grid.Row="1" 
                                            Grid.Column="1"
                                            Grid.ColumnSpan="3" />
@@ -80,6 +80,16 @@
                                     <Label Text="Line Total"
                                            Grid.Row="2"
                                            Grid.Column="3"
+                                           FontSize="Micro"/>
+                                    <!--Qty-->
+                                    <Label Text="{Binding ShoppingCart.Qty}"
+                                           Grid.Row="3"
+                                           Grid.Column="1"
+                                           FontSize="Micro"/>
+                                    <!--Price-->
+                                    <Label Text="{Binding ShoppingCat.Price}"
+                                           Grid.Row="2"
+                                           Grid.Column="2"
                                            FontSize="Micro"/>
                                 </Grid>
                             </Frame>

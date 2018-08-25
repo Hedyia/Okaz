@@ -10,6 +10,13 @@ namespace Okaz.PCL.Services
 {
     public interface ICatalogDataService
     {
-        ObservableCollection<MobileSpecification> GetAllPhones();
+        ObservableCollection<User> GetAllUsers();
+        ObservableCollection<Product> GetAllProducts();
+        ObservableCollection<Category> GetAllCategories();
+        ObservableCollection<Brand> GetAllBrands();
+        ObservableCollection<Vendor> GetAllVendors();
+        ObservableCollection<Rating> GetProductRatting();
+        ShoppingCart GetShoppingCart();
+
     }
 }

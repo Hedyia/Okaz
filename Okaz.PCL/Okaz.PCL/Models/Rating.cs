@@ -6,11 +6,11 @@ using System.Threading.Tasks;
 
 namespace Okaz.PCL.Models
 {
-    public class ShoppingCartItem
+    public class Rating
     {
         public int Id { get; set; }
-        public Product Product { get; set; }
-        public int Price { get; set; }
-        public int Qty { get; set; }
+        public string UserName { get; set; }
+        public string Description { get; set; }
+        public int Rate { get; set; }
     }
 }

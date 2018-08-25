@@ -6,9 +6,8 @@ using System.Threading.Tasks;
 
 namespace Okaz.PCL.Models
 {
-    public class Category
+    public interface IProductSpecification
     {
-        public int Id { get; set; }
-        public string Name { get; set; }
+        
     }
 }

@@ -1,10 +1,12 @@
-﻿using Android.App;
+﻿using Acr.UserDialogs;
+using Android.App;
 using Android.Content.PM;
 using Android.OS;
 using Android.Support.V7.Widget;
 using Android.Views;
 using Prism;
 using Prism.Ioc;
+using Xamarin.Forms;
 
 namespace Okaz.PCL.Droid
 {
@@ -21,6 +23,7 @@ namespace Okaz.PCL.Droid
 
             global::Xamarin.Forms.Forms.Init(this, bundle);
             Stormlion.SNavigation.Droid.Platform.Init(this);
+            UserDialogs.Init(() => (Activity)Forms.Context);
             LoadApplication(new App(new AndroidInitializer()));
         }
 

@@ -24,10 +24,10 @@ namespace Okaz.PCL
 
         protected override async void OnInitialized()
         {
-            Syncfusion.Licensing.SyncfusionLicenseProvider.RegisterLicense("Key");
+            Syncfusion.Licensing.SyncfusionLicenseProvider.RegisterLicense("key");
             InitializeComponent();
 
-            await NavigationService.NavigateAsync("ShoppingCartPage");
+            await NavigationService.NavigateAsync("LoginPage");
         }
 
         protected override void RegisterTypes(IContainerRegistry containerRegistry)

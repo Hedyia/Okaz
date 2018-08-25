@@ -10,7 +10,7 @@ namespace Okaz.PCL.Models
     public class ShoppingCart
     {
         public int Id { get; set; }
-        public User User { get; set; }
+        public string UserName { get; set; }
         public ObservableCollection<ShoppingCartItem> ShoppingCartItems { get; set; }
     }
 }

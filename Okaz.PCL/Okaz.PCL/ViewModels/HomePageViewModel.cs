@@ -96,38 +96,12 @@ namespace Okaz.PCL.ViewModels
         {
             get
             {
-                if (_brands == null)
-                {
-                    _brands = new ObservableCollection<Brand>()
-                    {
-                        new Brand
-                        {
-                            Id = 1,
-                            ImgUrl = "https://upload.wikimedia.org/wikipedia/commons/thumb/2/29/Xiaomi_logo.svg/2000px-Xiaomi_logo.svg.png"
-                        },
-                        new Brand
-                        {
-                            Id = 2,
-                            ImgUrl = "http://www.stickpng.com/assets/images/58ac4d880aaa10546adf2711.png"
-                        },
-                        new Brand
-                        {
-                            Id = 3,
-                            ImgUrl = "https://image.freepik.com/free-icon/apple-logo_318-40184.jpg"
-                        },
-                        new Brand
-                        {
-                            Id = 4,
-                            ImgUrl = "https://upload.wikimedia.org/wikipedia/commons/thumb/0/08/Blackberry_Logo_without_wordmark.svg/2000px-Blackberry_Logo_without_wordmark.svg.png"
-                        }
-                    };
-                }
-                return _brands;
+                return _catalogDaraService.GetAllBrands();
             }
             set { SetProperty(ref _brands, value); }
         }
 
-        public ObservableCollection<MobileSpecification> Products { get => _catalogDaraService.GetAllPhones(); }
+        public ObservableCollection<Product> Products { get => _catalogDaraService.GetAllProducts(); }
         
         public HomePageViewModel(INavigationService navigationService,ICatalogDataService catalogDataService)
         {
@@ -140,7 +114,7 @@ namespace Okaz.PCL.ViewModels
         }
         public void Navigation(Syncfusion.ListView.XForms.ItemTappedEventArgs eventArgs)
         {
-            var mobileSpecification = eventArgs.ItemData as MobileSpecification;
+            var mobileSpecification = eventArgs.ItemData as Product;
             var p = new NavigationParameters();
             p.Add("1", mobileSpecification);
 

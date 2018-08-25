@@ -10,5 +10,6 @@ namespace Okaz.PCL.Models
     {
         public int Id { get; set; }
         public string ImgUrl { get; set; }
+        public List<int> Products { get; set; }
     }
 }

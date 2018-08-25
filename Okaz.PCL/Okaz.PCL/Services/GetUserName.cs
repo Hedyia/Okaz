@@ -4,11 +4,10 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Okaz.PCL.Models
+namespace Okaz.PCL.Services
 {
-    public class Category
+    public static class GetUserName
     {
-        public int Id { get; set; }
-        public string Name { get; set; }
+        public static string UserName = "";
     }
 }
