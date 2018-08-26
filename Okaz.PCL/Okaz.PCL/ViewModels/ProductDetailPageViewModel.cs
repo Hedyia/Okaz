@@ -15,7 +15,7 @@ namespace Okaz.PCL.ViewModels
         INavigationService _navigationService;
         private Product _productDetail;
         private ShoppingCartItem _shoppingCartItem;
-        private int _qty;
+        private Decimal _qty = 1;
 
         #endregion
         #region Properties
@@ -29,7 +29,7 @@ namespace Okaz.PCL.ViewModels
             get { return _productDetail; }
             set { SetProperty(ref _productDetail, value); }
         }
-        public int Qty
+        public Decimal Qty
         {
             get { return _qty; }
             set { SetProperty(ref _qty, value); }
@@ -69,7 +69,7 @@ namespace Okaz.PCL.ViewModels
                 {
                     Id = 1,
                     Price = ProductDetail.Price,
-                    Qty = Qty,
+                    Qty = Convert.ToInt32(Qty),
                     Product = ProductDetail
 
                 };

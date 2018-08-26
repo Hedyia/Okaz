@@ -30,6 +30,24 @@ namespace Okaz.PCL.ViewModels
             };
 
         }
-  
+        private int _lineTotal;
+        public int LineTotal
+        {
+            get => ShoppingCart.ShoppingCartItems.Sum(s => s.TotalLine);
+            set { SetProperty(ref _lineTotal, value); }
+        }
+        private int _shippingCost;
+        public int ShippingCost
+        {
+            get => 30;
+            set { SetProperty(ref _shippingCost, value); }
+        }
+        private int _totalPrice;
+        public int TotalPrice
+        {
+            get => ShoppingCart.ShoppingCartItems.Sum(s => s.TotalLine) + ShippingCost ;
+            set { SetProperty(ref _totalPrice, value); }
+        }
+
     }
 }

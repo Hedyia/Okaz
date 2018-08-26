@@ -72,7 +72,7 @@
                        TextColor="Black"
                        FontAttributes="Bold" />
                         <numeric:SfNumericUpDown x:Name="numericUpDown" 
-                                                 Value="{Binding }" Minimum="1" Maximum="10" 
+                                                 Value="{Binding Qty}" Minimum="1" Maximum="10" 
                                                  FormatString="n" 
                                                  TextAlignment="Center"/>
                     </StackLayout>

@@ -82,15 +82,20 @@
                                            Grid.Column="3"
                                            FontSize="Micro"/>
                                     <!--Qty-->
-                                    <Label Text="{Binding ShoppingCart.Qty}"
+                                    <Label Text="{Binding Qty}"
                                            Grid.Row="3"
                                            Grid.Column="1"
                                            FontSize="Micro"/>
                                     <!--Price-->
-                                    <Label Text="{Binding ShoppingCat.Price}"
-                                           Grid.Row="2"
+                                    <Label Text="{Binding Price}"
+                                           Grid.Row="3"
                                            Grid.Column="2"
                                            FontSize="Micro"/>
+                                    <!--Total Price-->
+                                    <Label Text="{Binding TotalLine}"
+                                           Grid.Row="3"
+                                           Grid.Column="3"
+                                           FontSize="Micro" />
                                 </Grid>
                             </Frame>
                         </ViewCell>
@@ -99,52 +104,56 @@
             </ListView>
             <Frame Margin="3"
                    VerticalOptions="EndAndExpand"
-                   HeightRequest="200">
+                   HeightRequest="250">
                 <StackLayout>
                     <Label Text="Your Order"
                            TextColor="Black"
                            FontSize="Medium"/>
-                    <Label Text="Purchase Total" />
-                    <Grid>
+                    <Grid Margin="3">
                         <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width=".8*" />
-                            <ColumnDefinition Width=".2*" />
+                            <ColumnDefinition Width=".5*" />
+                            <ColumnDefinition Width=".5*" />
                         </Grid.ColumnDefinitions>
                         <Grid.RowDefinitions>
-                            <RowDefinition />
+                            <RowDefinition Height="*" />
+                            <RowDefinition Height="*" />
+                            <RowDefinition Height="2*"/>
                         </Grid.RowDefinitions>
-                        <Label Text="Shipping Cost"
-                           Grid.Row="0" 
-                           Grid.Column="0"/>
-                        <Label Text="{Binding Shipping, StringFormat='{0}LE'}"
-                           HorizontalOptions="Start"
+                        <Label Text="Purchase Total" 
+                               Grid.Row="0"
+                               Grid.Column="0"/>
+
+                        <Label Text="{Binding LineTotal, StringFormat='{0}LE'}"
+                           HorizontalOptions="End"
                            TextColor="Black"
                            Grid.Row="0"
                            Grid.Column="1"/>
+
+                        <Label Text="Shipping Cost"
+                           Grid.Row="1" 
+                           Grid.Column="0"/>
+
+                        <Label Text="{Binding ShippingCost, StringFormat='{0}LE'}"
+                           HorizontalOptions="End"
+                           TextColor="Black"
+                           Grid.Row="1"
+                           Grid.Column="1"/>
+                        <Label Text="Total" 
+                               Grid.Row="2"
+                               Grid.Column="0"
+                               HorizontalOptions="End"
+                               VerticalOptions="EndAndExpand"
+                               FontAttributes="Bold"
+                               FontSize="Large" />
+                        <Label Text="{Binding TotalPrice, StringFormat='{0}LE'}" 
+                               Grid.Row="2"
+                               Grid.Column="1"
+                               HorizontalOptions="Start"
+                               VerticalOptions="EndAndExpand"
+                               FontAttributes="Bold"
+                               FontSize="Large" />
                     </Grid>
-                    <Grid Margin="2">
-                        <Grid.ColumnDefinitions>
-                            <ColumnDefinition />
-                            <ColumnDefinition />
-                        </Grid.ColumnDefinitions>
-                        <Grid.RowDefinitions>
-                            <RowDefinition />
-                        </Grid.RowDefinitions>
-                        <Label Text="Total"
-                       FontAttributes="Bold"
-                       FontSize="Large"
-                       HorizontalOptions="CenterAndExpand"
-                       Grid.Row="0"
-                       Grid.Column="0"/>
-                        <Label Text="{Binding Total, StringFormat='{0}LE'}"
-                       FontAttributes="Bold"
-                       FontSize="Large"
-                       TextColor="Black" 
-                       HorizontalOptions="CenterAndExpand"
-                       Grid.Row="0"
-                       Grid.Column="1"/>
-                    </Grid>
-                    <Button Text="Checkout" />
+                    <Button VerticalOptions="EndAndExpand" Text="Checkout" />
                 </StackLayout>
             </Frame>
         </StackLayout>

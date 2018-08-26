@@ -102,6 +102,15 @@ namespace Okaz.PCL.ViewModels
         }
 
         public ObservableCollection<Product> Products { get => _catalogDaraService.GetAllProducts(); }
+
+        private DelegateCommand _shoppingCartCommand;
+        public DelegateCommand ShoppingCartCommand =>
+            _shoppingCartCommand ?? (_shoppingCartCommand = new DelegateCommand(ExecuteShoppingCartCommand));
+
+        void ExecuteShoppingCartCommand()
+        {
+            _navigationService.NavigateAsync(nameof(ShoppingCartPage));
+        }
         
         public HomePageViewModel(INavigationService navigationService,ICatalogDataService catalogDataService)
         {

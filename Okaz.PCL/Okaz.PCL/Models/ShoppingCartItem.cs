@@ -12,5 +12,6 @@ namespace Okaz.PCL.Models
         public Product Product { get; set; }
         public int Price { get; set; }
         public int Qty { get; set; }
+        public int TotalLine { get => Price * Qty; }
     }
 }

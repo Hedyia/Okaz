@@ -17,7 +17,7 @@
         </ResourceDictionary>
     </ContentPage.Resources>
     <ContentPage.ToolbarItems>
-        <ToolbarItem Icon="ic_shopping_cart" />
+        <ToolbarItem Icon="ic_shopping_cart" Command="{Binding ShoppingCartCommand}" />
     </ContentPage.ToolbarItems>
     <ContentPage.Content>
         <ScrollView>

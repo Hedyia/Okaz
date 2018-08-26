@@ -24,7 +24,7 @@ namespace Okaz.PCL
 
         protected override async void OnInitialized()
         {
-            Syncfusion.Licensing.SyncfusionLicenseProvider.RegisterLicense("key");
+            Syncfusion.Licensing.SyncfusionLicenseProvider.RegisterLicense("Key");
             InitializeComponent();
 
             await NavigationService.NavigateAsync("LoginPage");
